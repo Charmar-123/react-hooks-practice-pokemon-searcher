@@ -1,19 +1,31 @@
-import React from "react";
+import { useState } from "react";
 import PokemonCollection from "./PokemonCollection";
 import PokemonForm from "./PokemonForm";
 import Search from "./Search";
 import { Container } from "semantic-ui-react";
 
 function PokemonPage() {
+
+  const [searchedName, setSearchedName] = useState("")
+  const [updatedListCard, setUpdatedListCard] = useState([])
+
+  const handleSearch = (inputName) => {
+    setSearchedName(inputName)
+  }
+
+  const handleSubmit = (updatedCard) => {
+    setUpdatedListCard(updatedCard)
+  }
+
   return (
     <Container>
       <h1>Pokemon Searcher</h1>
       <br />
-      <PokemonForm />
+      <PokemonForm handleSubmit={handleSubmit}/>
       <br />
-      <Search />
+      <Search handleSearch={handleSearch}/>
       <br />
-      <PokemonCollection />
+      <PokemonCollection searchedName={searchedName} updatedListCard={updatedListCard}/>
     </Container>
   );
 }
